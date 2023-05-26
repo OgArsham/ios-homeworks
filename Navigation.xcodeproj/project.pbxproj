@@ -16,6 +16,7 @@
 		398352082A1D531300237770 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398352072A1D531200237770 /* PostViewController.swift */; };
 		3983520B2A1D5D6000237770 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3983520A2A1D5D6000237770 /* Post.swift */; };
 		3983520F2A1D70E200237770 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3983520E2A1D70E200237770 /* InfoViewController.swift */; };
+		398352122A1EAF7E00237770 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398352112A1EAF7E00237770 /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		398352072A1D531200237770 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		3983520A2A1D5D6000237770 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3983520E2A1D70E200237770 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		398352112A1EAF7E00237770 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				398351FA2A17CCC900237770 /* LaunchScreen.storyboard */,
 				398351FD2A17CCC900237770 /* Info.plist */,
 				3983520A2A1D5D6000237770 /* Post.swift */,
+				398352102A1EAF4C00237770 /* Profile */,
 				398352092A1D532800237770 /* Controllers */,
 			);
 			path = Navigation;
@@ -82,6 +85,14 @@
 				3983520E2A1D70E200237770 /* InfoViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		398352102A1EAF4C00237770 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				398352112A1EAF7E00237770 /* ProfileHeaderView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +172,7 @@
 				3983520B2A1D5D6000237770 /* Post.swift in Sources */,
 				398352062A1D332400237770 /* ProfileViewController.swift in Sources */,
 				398351F22A17CCC700237770 /* SceneDelegate.swift in Sources */,
+				398352122A1EAF7E00237770 /* ProfileHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
