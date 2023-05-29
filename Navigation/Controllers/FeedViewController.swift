@@ -8,13 +8,8 @@
 import UIKit
 
 class FeedViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = .brown
-        title = "Feed"
-        
+    
+    let watchPostButton: UIButton = {
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 100, y: 400, width: 200, height: 45)
         button.backgroundColor = .orange
@@ -22,8 +17,17 @@ class FeedViewController: UIViewController {
         button.setTitle("watch post", for: .normal)
         button.setTitleColor(.purple, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-        view.addSubview(button)
         button.addTarget(self, action: #selector(watchPost), for: .touchUpInside)
+        
+        return button
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .brown
+        title = "Feed"
+        
+        view.addSubview(watchPostButton)
         }
     
     @objc func watchPost() {
@@ -33,16 +37,5 @@ class FeedViewController: UIViewController {
         postViewController.titleOfPost = post1.title
         
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

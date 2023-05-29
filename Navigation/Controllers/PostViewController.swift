@@ -17,15 +17,16 @@ class PostViewController: UIViewController {
         title = titleOfPost
         view.backgroundColor = .systemGray
         
-        let infoButton = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(showInfo))
-        navigationItem.rightBarButtonItem = infoButton
-      
-        
+        makeInfoButton()
     }
     
     @objc func showInfo() {
         let infoViewController = InfoViewController()
         present(infoViewController, animated: true)
+    }
+    private func makeInfoButton() {
+        let infoButton = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(showInfo))
+        navigationItem.rightBarButtonItem = infoButton
     }
 
 }

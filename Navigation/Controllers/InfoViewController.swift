@@ -8,6 +8,17 @@
 import UIKit
 
 class InfoViewController: UIViewController {
+    
+    private let allertButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 100, y: 400, width: 200, height: 45)
+        button.layer.cornerRadius = 12
+        button.setTitle("Alert", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+        button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
+        
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,13 +26,7 @@ class InfoViewController: UIViewController {
         view.backgroundColor = .purple
         title = "Info"
 
-        let button = UIButton(type: .system)
-        button.frame = CGRect(x: 100, y: 400, width: 200, height: 45)
-        button.layer.cornerRadius = 12
-        button.setTitle("Alert", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
-        view.addSubview(button)
-        button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
+        view.addSubview(allertButton)
     }
     
   @objc func showAlert() {
