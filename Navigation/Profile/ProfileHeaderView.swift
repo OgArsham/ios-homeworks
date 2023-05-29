@@ -9,55 +9,57 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    var avatarImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 16, y: 16, width: 150, height: 150))
-        image.layer.cornerRadius = image.frame.width/2
+    private let avatarImageView: UIImageView = {
+        let image = UIImageView()
+        image.layer.cornerRadius = 75
         image.layer.borderWidth = 3
         image.layer.borderColor = CGColor(red: 100, green: 100, blue: 100, alpha: 1)
         image.image = UIImage(named: "avatar")
+        image.translatesAutoresizingMaskIntoConstraints = false
         
         return image
     }()
     
-    var nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
         label.text = "My Name"
-        label.numberOfLines = 1
-        label.frame = CGRect(x: 185, y: 27, width: 100, height: 27)
-        
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    var statusLabel: UILabel = {
+    private let statusLabel: UILabel = {
         let label = UILabel()
-        label.frame = CGRect(x: 200, y: 100, width: 100, height: 27)
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
         label.text = "Status..."
         label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
 
-    var statusButton: UIButton = {
+    private let setStatusButton: UIButton = {
         let button = UIButton(type: .system)
-        button.frame = CGRect(x: 16, y: 200, width: 360, height: 50)
         button.backgroundColor = .blue
         button.layer.cornerRadius = 4
         button.setTitle("Set status", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-        
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowRadius = 4
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        
         
         return button
     }()
     
-    var statusTextFiled = {
-        let textField = UITextField(frame: CGRect(x: 200, y: 130, width: 150, height: 40))
+    private let statusTextFiled = {
+        let textField = UITextField()
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
@@ -66,6 +68,7 @@ class ProfileHeaderView: UIView {
         textField.textColor = .black
         textField.backgroundColor = .white
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
     }()
@@ -74,11 +77,8 @@ class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(avatarImage)
-        addSubview(nameLabel)
-        addSubview(statusLabel)
-        addSubview(statusButton)
-        addSubview(statusTextFiled)
+        
+        layout()
     }
     
     required init?(coder: NSCoder) {
@@ -91,5 +91,40 @@ class ProfileHeaderView: UIView {
     @objc func buttonPressed() {
         statusLabel.text = statusText
     }
+    
+    func layout() {
+        addSubview(avatarImageView)
+        addSubview(nameLabel)
+        addSubview(statusLabel)
+        addSubview(setStatusButton)
+        addSubview(statusTextFiled)
+        
+        NSLayoutConstraint.activate([
+            avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 150),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 150),
+            
+            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            statusLabel.bottomAnchor.constraint(equalTo: statusTextFiled.topAnchor, constant: -16),
+            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            statusTextFiled.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
+            statusTextFiled.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            statusTextFiled.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            statusTextFiled.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    
     
 }
