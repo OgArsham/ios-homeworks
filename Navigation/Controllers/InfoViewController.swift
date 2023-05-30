@@ -9,7 +9,7 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    private let allertButton: UIButton = {
+    private lazy var allertButton: UIButton = {
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 100, y: 400, width: 200, height: 45)
         button.layer.cornerRadius = 12

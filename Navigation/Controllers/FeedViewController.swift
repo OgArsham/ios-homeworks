@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    private let post1Button: UIButton = {
+    private lazy var post1Button: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .orange
         button.setTitle("Post #1", for: .normal)
@@ -21,7 +21,7 @@ class FeedViewController: UIViewController {
         return button
     }()
     
-    private let post2Button: UIButton = {
+    private lazy var post2Button: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .orange
         button.setTitle("Post #2", for: .normal)
@@ -73,7 +73,7 @@ class FeedViewController: UIViewController {
         @objc func watchPost() {
         let postViewController = PostViewController()
         navigationController?.pushViewController( postViewController, animated: true)
-        var post = Post(title: "Post")
+        let post = Post(title: "Post")
         postViewController.titleOfPost = post.title
 
     }

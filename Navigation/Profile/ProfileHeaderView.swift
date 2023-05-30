@@ -41,7 +41,7 @@ class ProfileHeaderView: UIView {
         return label
     }()
 
-    private let setStatusButton: UIButton = {
+    private lazy var setStatusButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .blue
         button.layer.cornerRadius = 4
@@ -58,7 +58,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    private let statusTextFiled = {
+    private lazy var statusTextFiled = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 12
@@ -73,7 +73,7 @@ class ProfileHeaderView: UIView {
         return textField
     }()
     
-    private var statusText: String = ""
+    private var statusText: String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -93,11 +93,8 @@ class ProfileHeaderView: UIView {
     }
     
     func layout() {
-        addSubview(avatarImageView)
-        addSubview(nameLabel)
-        addSubview(statusLabel)
-        addSubview(setStatusButton)
-        addSubview(statusTextFiled)
+        [avatarImageView, nameLabel, statusLabel, statusLabel, setStatusButton, statusTextFiled].forEach { addSubview($0) }
+       
         
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -124,7 +121,5 @@ class ProfileHeaderView: UIView {
             statusTextFiled.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
-    
-    
     
 }

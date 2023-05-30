@@ -39,16 +39,16 @@ class ProfileViewController: UIViewController {
         view.addSubview(unknownButton)
         
         profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        
+        let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            profileHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            profileHeaderView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            profileHeaderView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
             profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
             
             unknownButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             unknownButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            unknownButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            unknownButton.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
         
         
