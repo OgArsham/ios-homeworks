@@ -28,12 +28,6 @@ class ProfileViewController: UIViewController {
         layout()
     }
     
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        
-    }
     private func layout() {
         view.addSubview(profileHeaderView)
         view.addSubview(unknownButton)
