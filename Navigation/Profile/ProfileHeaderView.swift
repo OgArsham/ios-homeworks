@@ -55,8 +55,8 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    private lazy var statusTextFiled: CustomTextField = {
-        let textField = CustomTextField()
+    private lazy var statusTextFiled: UITextField = {
+        let textField = UITextField()
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
@@ -66,6 +66,8 @@ class ProfileHeaderView: UIView {
         textField.backgroundColor = .white
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         textField.placeholder = "Set status..."
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        textField.leftViewMode = .always
         
         return textField
     }()

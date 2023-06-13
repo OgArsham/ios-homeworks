@@ -19,6 +19,7 @@
 		398352122A1EAF7E00237770 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398352112A1EAF7E00237770 /* ProfileHeaderView.swift */; };
 		39AF5F5A2A26850300CF9D86 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AF5F592A26850300CF9D86 /* CustomTextField.swift */; };
 		39AF5F5C2A28CF4600CF9D86 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AF5F5B2A28CF4600CF9D86 /* Extentions.swift */; };
+		39AF5F5E2A29323200CF9D86 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AF5F5D2A29323200CF9D86 /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		398352112A1EAF7E00237770 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		39AF5F592A26850300CF9D86 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		39AF5F5B2A28CF4600CF9D86 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		39AF5F5D2A29323200CF9D86 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				398352112A1EAF7E00237770 /* ProfileHeaderView.swift */,
+				39AF5F5D2A29323200CF9D86 /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			files = (
 				3983520F2A1D70E200237770 /* InfoViewController.swift in Sources */,
 				398352082A1D531300237770 /* PostViewController.swift in Sources */,
+				39AF5F5E2A29323200CF9D86 /* LogInViewController.swift in Sources */,
 				39AF5F5C2A28CF4600CF9D86 /* Extentions.swift in Sources */,
 				398351F02A17CCC700237770 /* AppDelegate.swift in Sources */,
 				398352042A1D331300237770 /* FeedViewController.swift in Sources */,
