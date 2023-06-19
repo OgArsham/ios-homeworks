@@ -15,8 +15,7 @@ class ProfileHeaderView: UIView {
         image.layer.borderWidth = 3
         image.layer.borderColor = CGColor(red: 100, green: 100, blue: 100, alpha: 1)
         image.image = UIImage(named: "avatar")
-        image.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return image
     }()
     
@@ -26,7 +25,7 @@ class ProfileHeaderView: UIView {
         label.textColor = .black
         label.text = "My Name"
         label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
+
         return label
     }()
     
@@ -36,7 +35,6 @@ class ProfileHeaderView: UIView {
         label.textColor = .gray
         label.text = "Status..."
         label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
@@ -52,13 +50,12 @@ class ProfileHeaderView: UIView {
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
         return button
     }()
     
-    private lazy var statusTextFiled = {
+    private lazy var statusTextFiled: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 12
@@ -68,7 +65,9 @@ class ProfileHeaderView: UIView {
         textField.textColor = .black
         textField.backgroundColor = .white
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "Set status..."
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        textField.leftViewMode = .always
         
         return textField
     }()
@@ -78,7 +77,8 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        layout()
+        addSubviews(avatarImageView, nameLabel, statusLabel, statusTextFiled, setStatusButton)
+        layoutConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -92,9 +92,8 @@ class ProfileHeaderView: UIView {
         statusLabel.text = statusText
     }
     
-    func layout() {
-        [avatarImageView, nameLabel, statusLabel, statusLabel, setStatusButton, statusTextFiled].forEach { addSubview($0) }
-       
+    
+    func layoutConstraints() {
         
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -123,3 +122,6 @@ class ProfileHeaderView: UIView {
     }
     
 }
+
+
+

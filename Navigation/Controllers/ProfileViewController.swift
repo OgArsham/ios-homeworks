@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
     let unknownButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("PUSH", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         button.backgroundColor = UIColor.systemGray
         
         return button
@@ -28,18 +28,14 @@ class ProfileViewController: UIViewController {
         layout()
     }
     
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        
-    }
     private func layout() {
         view.addSubview(profileHeaderView)
         view.addSubview(unknownButton)
         
-        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        profileHeaderView.toAutoLayout()
+        
         let safeAreaGuide = view.safeAreaLayoutGuide
+        
         NSLayoutConstraint.activate([
             profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileHeaderView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
@@ -50,8 +46,6 @@ class ProfileViewController: UIViewController {
             unknownButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             unknownButton.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
-        
-        
     }
     
 }
