@@ -120,7 +120,6 @@ class ProfileHeaderView: UIView {
             statusTextFiled.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
-    
 }
 
 
