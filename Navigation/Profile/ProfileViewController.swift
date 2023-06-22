@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
     private let feed = Post.makeFeed()
     
     private lazy var tableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self , forCellReuseIdentifier: PostTableViewCell.indetifier)
@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.addSubviews(tableView)
         layoutConstraints()
+        view.backgroundColor = .white
         
     }
     func layoutConstraints() {
