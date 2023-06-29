@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 extension UIView {
+    static var indetifier: String {
+        String(describing: self )
+    }
     
     func toAutoLayout() {
         translatesAutoresizingMaskIntoConstraints = false

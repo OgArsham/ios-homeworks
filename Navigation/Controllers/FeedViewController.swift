@@ -73,8 +73,8 @@ class FeedViewController: UIViewController {
         @objc func watchPost() {
         let postViewController = PostViewController()
         navigationController?.pushViewController( postViewController, animated: true)
-        let post = Post(title: "Post")
-        postViewController.titleOfPost = post.title
+//        let post = Post(title: "Post")
+//        postViewController.titleOfPost = post.title
 
     }
 

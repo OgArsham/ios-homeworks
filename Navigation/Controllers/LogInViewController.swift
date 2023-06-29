@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class LogInViewController: UIViewController {
 
     let setColor = UIColor(named: "BlueColor")

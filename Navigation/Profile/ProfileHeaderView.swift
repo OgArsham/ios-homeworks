@@ -104,15 +104,18 @@ class ProfileHeaderView: UIView {
             nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
             nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            nameLabel.heightAnchor.constraint(equalToConstant: 30),
             
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
             setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor), 
             
             statusLabel.bottomAnchor.constraint(equalTo: statusTextFiled.topAnchor, constant: -16),
             statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
             statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            statusLabel.heightAnchor.constraint(equalToConstant: 30),
             
             statusTextFiled.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
             statusTextFiled.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
@@ -120,7 +123,6 @@ class ProfileHeaderView: UIView {
             statusTextFiled.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
-    
 }
 
 
