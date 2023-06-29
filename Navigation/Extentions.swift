@@ -8,17 +8,19 @@
 import Foundation
 import UIKit
 
+
 extension UIView {
+    
+    // indetifier
     static var indetifier: String {
         String(describing: self )
     }
     
-    func toAutoLayout() {
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    func addSubviews(_ subviews: UIView...) {
-        subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false}
+    //add subviews and set translatesAutoresizingMaskIntoConstraints
+    func addSubviews(allAutoLayout: Bool,  subviews: UIView...) {
+        if allAutoLayout == false {
+            subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        }
         subviews.forEach { addSubview($0) }
     }
 }
@@ -54,3 +56,25 @@ extension UIColor {
     }
 }
 
+extension UIApplication {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.connectedScenes
+          .filter({$0.activationState == .foregroundActive})
+          .compactMap({$0 as? UIWindowScene})
+          .first?.windows
+          .filter({$0.isKeyWindow})
+          .first?.rootViewController) -> UIViewController? {
+
+        if let navigationController = controller as? UINavigationController {
+            return topViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
+    }
+}

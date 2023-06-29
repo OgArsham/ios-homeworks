@@ -77,7 +77,7 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubviews(avatarImageView, nameLabel, statusLabel, statusTextFiled, setStatusButton)
+        addSubviews(allAutoLayout: false, subviews: avatarImageView, nameLabel, statusLabel, statusTextFiled, setStatusButton)
         layoutConstraints()
     }
     
