@@ -26,10 +26,21 @@ class PhotosTableViewCell: UITableViewCell {
     lazy var arrowView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "arrow.right")
+        image.tintColor = .black
+        image.contentMode = .scaleAspectFill
         
         return image
     }()
     
+    private var photoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
     let image1 = {
         let image = UIImageView()
         image.image = UIImage(named: "Image1")
@@ -69,20 +80,20 @@ class PhotosTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        headerLabel.text = nil
-        arrowView.image = nil
-        image1.image = nil
-        image2.image = nil
-        image3.image = nil
-        image4.image = nil
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//
+//        headerLabel.text = nil
+//        arrowView.image = nil
+//        image1.image = nil
+//        image2.image = nil
+//        image3.image = nil
+//        image4.image = nil
+//    }
     
     private func addSubviews() {
         contentView.addSubviews(allAutoLayout: false, subviews: contentPhotoView)
-        contentPhotoView.addSubviews(allAutoLayout: false, subviews: headerLabel, arrowView, image1, image2, image3, image4)
+        contentPhotoView.addSubviews(allAutoLayout: false, subviews: headerLabel, arrowView, photoStackView)
     }
     
     private func setImage(imageViews: UIImageView...) {
@@ -90,14 +101,11 @@ class PhotosTableViewCell: UITableViewCell {
             $0.layer.cornerRadius = 6
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true
+            $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
     private func layoutConstraints() {
-        
-        let imageWidht = (contentView.bounds.width - (12 * 2 + 3 * 8)) / 4
-        
-        contentView.backgroundColor = .cyan
         
         NSLayoutConstraint.activate([
             contentPhotoView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -110,31 +118,20 @@ class PhotosTableViewCell: UITableViewCell {
             
             arrowView.centerYAnchor.constraint(equalTo: headerLabel.centerYAnchor),
             arrowView.trailingAnchor.constraint(equalTo: contentPhotoView.trailingAnchor, constant: -12),
+            arrowView.widthAnchor.constraint(equalToConstant: 30),
+            arrowView.heightAnchor.constraint(equalToConstant: 30),
             
-            image1.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 12),
-            image1.leadingAnchor.constraint(equalTo: contentPhotoView.leadingAnchor, constant: 12),
-            image1.bottomAnchor.constraint(equalTo: contentPhotoView.bottomAnchor, constant: -12),
-            image1.heightAnchor.constraint(equalToConstant: (contentView.frame.width - (12 * 2 + 3 * 8)) / 4),
-            image1.widthAnchor.constraint(equalToConstant: (contentView.frame.width - (12 * 2 + 3 * 8)) / 4),
-            
-            image2.topAnchor.constraint(equalTo: image1.topAnchor),
-            image2.leadingAnchor.constraint(equalTo: image1.trailingAnchor, constant: 8),
-            image2.bottomAnchor.constraint(equalTo: image1.bottomAnchor),
-            image2.heightAnchor.constraint(equalToConstant: imageWidht),
-            image2.widthAnchor.constraint(equalToConstant: imageWidht),
-            
-            image3.topAnchor.constraint(equalTo: image2.topAnchor),
-            image3.leadingAnchor.constraint(equalTo: image2.trailingAnchor, constant: 8),
-            image3.bottomAnchor.constraint(equalTo: image2.bottomAnchor),
-            image3.heightAnchor.constraint(equalToConstant: imageWidht),
-            image3.widthAnchor.constraint(equalToConstant: imageWidht),
-            
-            image4.topAnchor.constraint(equalTo: image3.topAnchor),
-            image4.leadingAnchor.constraint(equalTo: image3.trailingAnchor, constant: 8),
-            image4.bottomAnchor.constraint(equalTo: image3.bottomAnchor),
-            image4.heightAnchor.constraint(equalToConstant: imageWidht),
-            image4.widthAnchor.constraint(equalToConstant: imageWidht)
+            photoStackView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 12),
+            photoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            photoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            photoStackView.heightAnchor.constraint(equalToConstant: (contentView.bounds.width - 3 * 8) / 4),
+            photoStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
         ])
+        
+        photoStackView.addArrangedSubview(image1)
+        photoStackView.addArrangedSubview(image2)
+        photoStackView.addArrangedSubview(image3)
+        photoStackView.addArrangedSubview(image4)
     }
     
 }
