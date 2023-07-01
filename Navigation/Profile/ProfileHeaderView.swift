@@ -140,19 +140,18 @@ class ProfileHeaderView: UIView {
    
     @objc private func tapAction() {
         self.avatarImageView.layer.borderWidth = 0
-        
-        UIView.animateKeyframes(withDuration: 0.8, delay: 0) {
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.625) {
-                
-                self.widthAvatar.isActive = false
-                self.trailAvatar = self.avatarImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
-                
-                self.trailAvatar.isActive = true
-                self.topAvatar.constant = (UIScreen.main.bounds.height - UIScreen.main.bounds.width) / 2
-                self.heightAvatar.constant = UIScreen.main.bounds.width - 32
-                self.backgroundView.layer.opacity = 0.5
-            }
-            UIView.addKeyframe(withRelativeStartTime: 0.625, relativeDuration: 1.0) {
+
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut) {
+            self.widthAvatar.isActive = false
+            self.trailAvatar = self.avatarImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+            
+            self.trailAvatar.isActive = true
+            self.topAvatar.constant = (UIScreen.main.bounds.height - UIScreen.main.bounds.width) / 2
+            self.heightAvatar.constant = UIScreen.main.bounds.width - 32
+            self.backgroundView.layer.opacity = 0.5
+            self.layoutIfNeeded()
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) {
                 self.crossButton.layer.opacity = 1
             }
         }
@@ -165,12 +164,15 @@ class ProfileHeaderView: UIView {
             }
             UIView.addKeyframe(withRelativeStartTime: 0.375, relativeDuration: 1) {
                 self.backgroundView.layer.opacity = 0
-                self.avatarImageView.layer.borderWidth = 3
                 
                 self.trailAvatar.isActive = false
                 self.widthAvatar.isActive = true
                 self.topAvatar.constant = 16
                 self.heightAvatar.constant = 150
+                self.layoutIfNeeded()
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.8, relativeDuration: 1) {
+                self.avatarImageView.layer.borderWidth = 3
             }
         }
     }
