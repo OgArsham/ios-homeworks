@@ -133,9 +133,9 @@ class LogInViewController: UIViewController {
     }
     
     func addSubviews() {
-        view.addSubviews(scrollView)
-        scrollView.addSubviews(contentView)
-        contentView.addSubviews(logoImageView, textFieldStackView, logButton)
+        view.addSubviews(allAutoLayout: false, subviews: scrollView)
+        scrollView.addSubviews(allAutoLayout: false, subviews: contentView)
+        contentView.addSubviews(allAutoLayout: false, subviews: logoImageView, textFieldStackView, logButton)
         textFieldStackView.addArrangedSubview(loginTextField)
         textFieldStackView.addArrangedSubview(passTextField)
     }
