@@ -93,6 +93,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                if indexPath.section == 0 {
                    navigationController?.pushViewController(photosViewController, animated: true)
                }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
