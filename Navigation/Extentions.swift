@@ -25,6 +25,22 @@ extension UIView {
     }
 }
 
+// shake view
+extension UIView {
+    func shake() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.repeatCount = 3
+        animation.duration = 0.07
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 10, y: self.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 10, y: self.center.y))
+        layer.add(animation, forKey: "position")
+    }
+}
+
+
+
+//add init for hex-color
 extension UIColor {
     convenience init?(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -78,3 +94,5 @@ extension UIApplication {
         return controller
     }
 }
+
+

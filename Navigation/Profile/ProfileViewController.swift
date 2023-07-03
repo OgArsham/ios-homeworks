@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private let feed = Post.makeFeed()
+    private var feed = Post.makeFeed()
     
     private lazy var tableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -95,8 +95,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                }
         tableView.deselectRow(at: indexPath, animated: true)
     }
+}
+//MARK: Likes
+extension ProfileViewController: PostCellDelegate {
+    func didTapLikeInCell(cell: PostTableViewCell) {
+        if let index = tableView.indexPath(for: cell)?.row {
+            feed[index].likes += 1
+            tableView.reloadData()
+        }
+       
+    }
     
 }
-
-
 

@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol PostCellDelegate: AnyObject {
+    func didTapLikeInCell(cell: PostTableViewCell)
+}
+
 class PostTableViewCell: UITableViewCell {
+    
+    weak var delegate: PostCellDelegate?
     
     let contentPostView: UIView = {
         let view = UIView()
@@ -39,9 +45,11 @@ class PostTableViewCell: UITableViewCell {
         return image
     }()
     
-    let likesLabel: UILabel = {
+    lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addLike)))
+        label.isUserInteractionEnabled = true
         
         return label
     }()
@@ -78,7 +86,7 @@ class PostTableViewCell: UITableViewCell {
         authorLabel.text = post.author
         descriptionLabel.text = post.description
         postImageView.image = UIImage(named: post.image)
-        likesLabel.text = "Likes: \(post.likes)"
+        likesLabel.text = "❤️ \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
     }
     private func addSubviews() {
@@ -115,6 +123,9 @@ class PostTableViewCell: UITableViewCell {
             viewsLabel.trailingAnchor.constraint(equalTo: contentPostView.trailingAnchor, constant: -16),
             viewsLabel.bottomAnchor.constraint(equalTo: contentPostView.bottomAnchor)
         ])
+    }
+    @objc private func addLike() {
+        delegate?.didTapLikeInCell(cell: self)
     }
 }
 

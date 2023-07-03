@@ -126,7 +126,13 @@ class ProfileHeaderView: UIView {
         statusText = textField.text ?? ""
     }
     @objc func buttonPressed() {
-        statusLabel.text = statusText
+        if statusText == nil {
+            statusTextFiled.shake()
+        } else if statusText == "" {
+            statusTextFiled.shake()
+        } else {
+            statusLabel.text = statusText
+        }
     }
 // MARK: - Animations
     

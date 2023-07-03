@@ -20,7 +20,7 @@ class LogInViewController: UIViewController {
         return image
     }()
     
-    let loginTextField: UITextField = {
+    private let loginTextField: UITextField = {
         let textField = UITextField()
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
@@ -33,7 +33,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
     
-    let passTextField: UITextField = {
+    private let passTextField: UITextField = {
         let textField = UITextField()
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
@@ -57,9 +57,14 @@ class LogInViewController: UIViewController {
         stackView.layer.cornerRadius = 10
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-       
         
         return stackView
+    }()
+    
+    private let warningLabel = {
+        let label = UILabel()
+        label.textColor = .systemRed
+        return label
     }()
     
      lazy var logButton: UIButton = {
@@ -119,27 +124,23 @@ class LogInViewController: UIViewController {
         notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func showKeyboard(notification: Notification) {
+    @objc private func showKeyboard(notification: Notification) {
         if let keyboardSize: CGRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             scrollView.contentInset.bottom = keyboardSize.height
         }
     }
-    @objc func hideKeyboard() {
+    @objc private func hideKeyboard() {
         scrollView.contentInset.bottom = .zero
     }
     
-    @objc func pushLogIn() {
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
-    }
-    
-    func addSubviews() {
+    private func addSubviews() {
         view.addSubviews(allAutoLayout: false, subviews: scrollView)
         scrollView.addSubviews(allAutoLayout: false, subviews: contentView)
         contentView.addSubviews(allAutoLayout: false, subviews: logoImageView, textFieldStackView, logButton)
         textFieldStackView.addArrangedSubview(loginTextField)
         textFieldStackView.addArrangedSubview(passTextField)
     }
-    func layout() {
+    private func layout() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
@@ -171,6 +172,62 @@ class LogInViewController: UIViewController {
             logButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
           
         ])
-        
     }
+//    MARK: Check login and password
+    
+//    func isValidPassword(userPassword : String) -> Bool {
+//        let passwordReg =  (".{8,}")
+//        let passwordTesting = NSPredicate(format: "SELF MATCHES %@", passwordReg)
+//        return passwordTesting.evaluate(with: userPassword)
+//    }
+//
+//    func isValidEmail(userEmail: String) -> Bool {
+//        let emailRegEx = "(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"+"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"+"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"+"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"+"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"+"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"+"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+//
+//        let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
+//        return emailTest.evaluate(with: userEmail)
+//    }
+//
+    @objc private func pushLogIn() {
+//        if loginTextField.text == "admin@mail.com" && passTextField.text == "password" {
+            navigationController?.pushViewController(ProfileViewController(), animated: true)
+//        } else if loginTextField.text?.isEmpty == true {
+//            loginTextField.shake()
+//        } else if passTextField.text?.isEmpty == true {
+//            passTextField.shake()
+//        } else {
+//            let alert = UIAlertController(title: "Not found!", message: "Enter correct email or password", preferredStyle: UIAlertController.Style.alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//
+//            checkValidation()
+//        }
+    }
+//
+//    private func showLabel() {
+//        contentView.addSubviews(allAutoLayout: false, subviews: warningLabel)
+//
+//        let topLabel = warningLabel.topAnchor.constraint(equalTo: logButton.bottomAnchor, constant: 12)
+//        let leadLabel = warningLabel.leadingAnchor.constraint(equalTo: logButton.leadingAnchor)
+//
+//        NSLayoutConstraint.activate([topLabel, leadLabel])
+//
+//    }
+//
+//
+//    private func checkValidation() {
+//        let email = isValidEmail(userEmail: loginTextField.text!)
+//        let password = isValidPassword(userPassword: passTextField.text!)
+//
+//        if email == false {
+//            warningLabel.text = "Please, enter e-mail"
+//            showLabel()
+//        } else if password == false {
+//            warningLabel.text = "Enter 8 or more symbols "
+//            showLabel()
+//        } else {
+//            warningLabel.removeFromSuperview()
+//        }
+//    }
 }
+
