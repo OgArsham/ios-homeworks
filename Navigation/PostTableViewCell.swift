@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol PostCellDelegate: AnyObject {
+    func didTapLikeInCell(cell: PostTableViewCell)
+    func tapPostImageInCell(cell: PostTableViewCell)
+}
+
 class PostTableViewCell: UITableViewCell {
+    
+    weak var delegate: PostCellDelegate?
     
     let contentPostView: UIView = {
         let view = UIView()
@@ -35,6 +42,7 @@ class PostTableViewCell: UITableViewCell {
     let postImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
+        image.isUserInteractionEnabled = true
         
         return image
     }()
@@ -42,6 +50,7 @@ class PostTableViewCell: UITableViewCell {
     let likesLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.isUserInteractionEnabled = true
         
         return label
     }()
@@ -58,6 +67,7 @@ class PostTableViewCell: UITableViewCell {
         
         addSubviews()
         layoutConstraints()
+        addGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -78,12 +88,12 @@ class PostTableViewCell: UITableViewCell {
         authorLabel.text = post.author
         descriptionLabel.text = post.description
         postImageView.image = UIImage(named: post.image)
-        likesLabel.text = "Likes: \(post.likes)"
+        likesLabel.text = "♥ \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
     }
     private func addSubviews() {
-        contentView.addSubviews(contentPostView)
-        contentPostView.addSubviews(authorLabel, descriptionLabel, postImageView, likesLabel, viewsLabel)
+        contentView.addSubviews(allAutoLayout: false, subviews: contentPostView)
+        contentPostView.addSubviews(allAutoLayout: false, subviews: authorLabel, descriptionLabel, postImageView, likesLabel, viewsLabel)
     }
     
     private func layoutConstraints() {
@@ -95,8 +105,7 @@ class PostTableViewCell: UITableViewCell {
             
             authorLabel.topAnchor.constraint(equalTo: contentPostView.topAnchor, constant: 16),
             authorLabel.leadingAnchor.constraint(equalTo: contentPostView.leadingAnchor, constant: 16),
-//            authorLabel.trailingAnchor.constraint(equalTo: contentPostView.trailingAnchor, constant: -200),
-//            authorLabel.heightAnchor.constraint(equalToConstant: 30),
+
             
             postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 12),
             postImageView.leadingAnchor.constraint(equalTo: contentPostView.leadingAnchor),
@@ -106,20 +115,35 @@ class PostTableViewCell: UITableViewCell {
             descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 16),
             descriptionLabel.leadingAnchor.constraint(equalTo: authorLabel.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentPostView.trailingAnchor, constant: -16),
-//            descriptionLabel.heightAnchor.constraint(equalToConstant: 50),
             
             likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             likesLabel.leadingAnchor.constraint(equalTo: authorLabel.leadingAnchor),
-//            likesLabel.trailingAnchor.constraint(equalTo: authorLabel.trailingAnchor),
-//            likesLabel.heightAnchor.constraint(equalToConstant: 30),
-            likesLabel.bottomAnchor.constraint(equalTo: contentPostView.bottomAnchor),
+
+            likesLabel.bottomAnchor.constraint(equalTo: contentPostView.bottomAnchor, constant: -10),
             
             viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             viewsLabel.trailingAnchor.constraint(equalTo: contentPostView.trailingAnchor, constant: -16),
-//            viewsLabel.leadingAnchor.constraint(equalTo: contentPostView.leadingAnchor, constant: 250),
-//            viewsLabel.heightAnchor.constraint(equalToConstant: 30),
-            viewsLabel.bottomAnchor.constraint(equalTo: contentPostView.bottomAnchor)
+            viewsLabel.bottomAnchor.constraint(equalTo: contentPostView.bottomAnchor, constant: -10)
         ])
+    }
+    
+    private func addGesture(){
+        
+        let tapLikesLabelGestureRecognizer = UITapGestureRecognizer()
+        let tapPostImageViewGestureRecognizer = UITapGestureRecognizer()
+        
+        tapLikesLabelGestureRecognizer.addTarget(self, action: #selector(addLike))
+        likesLabel.addGestureRecognizer(tapLikesLabelGestureRecognizer)
+  
+        tapPostImageViewGestureRecognizer.addTarget(self, action: #selector(tapPost))
+        postImageView.addGestureRecognizer(tapPostImageViewGestureRecognizer)
+        
+    }
+    @objc func addLike() {
+        delegate?.didTapLikeInCell(cell: self)
+    }
+    @objc func tapPost() {
+        delegate?.tapPostImageInCell(cell: self)
     }
 }
 

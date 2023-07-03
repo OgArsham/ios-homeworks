@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "1660150598_9-priroda-club-p-kvadrat-v-prirode-krasivo-foto-9.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

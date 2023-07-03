@@ -10,30 +10,36 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private let feed = Post.makeFeed()
+    private var feed = Post.makeFeed()
     
     private lazy var tableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self , forCellReuseIdentifier: PostTableViewCell.indetifier)
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.indetifier)
         
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviews(tableView)
+        view.addSubviews(allAutoLayout: false, subviews: tableView)
         layoutConstraints()
         view.backgroundColor = .white
-        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     func layoutConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo:safeAreaGuide.topAnchor ),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
     }
@@ -43,14 +49,27 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        feed.count
+        if section == 0   {
+            return 1
+        }
+        else {
+            return  feed.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.indetifier) as! PostTableViewCell
-        cell.setupCell(post: feed[indexPath.row])
         
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.indetifier) as! PhotosTableViewCell
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.indetifier) as! PostTableViewCell
+            cell.setupCell(post: feed[indexPath.row])
+            cell.delegate = self
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -66,46 +85,41 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+            2
+        }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+               let photosViewController = PhotosViewController()
+               if indexPath.section == 0 {
+                   navigationController?.pushViewController(photosViewController, animated: true)              
+               }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+//MARK: Likes and Posts
+extension ProfileViewController: PostCellDelegate {
+    func tapPostImageInCell(cell: PostTableViewCell) {
+        let postVC = OpenedPostViewController()
+        guard let index = self.tableView.indexPath(for: cell)?.row else { return }
+        let indexPath = IndexPath(row: index, section: 1)
+        feed[indexPath.row].views += 1
+        let fullPost = feed[indexPath.row]
+        
+        postVC.setupCell(post: fullPost)
+        present(postVC, animated: true)
+        
+        tableView.reloadData()
+    }
+    
+    func didTapLikeInCell(cell: PostTableViewCell) {
+        
+        if let index = tableView.indexPath(for: cell)?.row {
+            feed[index].likes += 1
+            
+            tableView.reloadData()
+        }
+    }
+    
 }
 
-
-
-//Deleted:
-//    let profileHeaderView = ProfileHeaderView()
-//    let unknownButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle("PUSH", for: .normal)
-//        button.toAutoLayout()
-//        button.backgroundColor = UIColor.systemGray
-//
-//        return button
-//    }()
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        view.backgroundColor = .lightGray
-//        title = "My profile"
-//
-//        layout()
-//    }
-//
-//    private func layout() {
-//        view.addSubview(profileHeaderView)
-//        view.addSubview(unknownButton)
-//
-//        profileHeaderView.toAutoLayout()
-//
-//        let safeAreaGuide = view.safeAreaLayoutGuide
-//
-//        NSLayoutConstraint.activate([
-//            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            profileHeaderView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
-//            profileHeaderView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
-//            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-//
-//            unknownButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            unknownButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            unknownButton.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
-//        ])
-//    }
