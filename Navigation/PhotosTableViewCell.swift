@@ -80,16 +80,6 @@ class PhotosTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//
-//        headerLabel.text = nil
-//        arrowView.image = nil
-//        image1.image = nil
-//        image2.image = nil
-//        image3.image = nil
-//        image4.image = nil
-//    }
     
     private func addSubviews() {
         contentView.addSubviews(allAutoLayout: false, subviews: contentPhotoView)

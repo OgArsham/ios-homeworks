@@ -38,8 +38,8 @@ class ProfileViewController: UIViewController {
         let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo:safeAreaGuide.topAnchor ),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
     }
@@ -92,16 +92,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                let photosViewController = PhotosViewController()
                if indexPath.section == 0 {
-                   navigationController?.pushViewController(photosViewController, animated: true)
-//               } else if indexPath.section == 1 {
-//                   let postVC = PostViewController()
-//                   present(postVC, animated: true)
-//                   
+                   navigationController?.pushViewController(photosViewController, animated: true)              
                }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-//MARK: Likes
+//MARK: Likes and Posts
 extension ProfileViewController: PostCellDelegate {
     func tapPostImageInCell(cell: PostTableViewCell) {
         let postVC = OpenedPostViewController()
@@ -112,6 +108,7 @@ extension ProfileViewController: PostCellDelegate {
         
         postVC.setupCell(post: fullPost)
         present(postVC, animated: true)
+        
         tableView.reloadData()
     }
     
@@ -119,7 +116,6 @@ extension ProfileViewController: PostCellDelegate {
         
         if let index = tableView.indexPath(for: cell)?.row {
             feed[index].likes += 1
-            
             
             tableView.reloadData()
         }

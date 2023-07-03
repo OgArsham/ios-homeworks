@@ -88,15 +88,13 @@
 				398351FA2A17CCC900237770 /* LaunchScreen.storyboard */,
 				398351FD2A17CCC900237770 /* Info.plist */,
 				3983520A2A1D5D6000237770 /* Post.swift */,
-				39B968982A52AE37004904E6 /* OpenedPostViewController.swift */,
 				39B968942A4DF6FA004904E6 /* PhotoStruct.swift */,
 				39F653152A3BAC34006927E0 /* PostTableViewCell.swift */,
 				39B9688E2A4C316C004904E6 /* PhotosTableViewCell.swift */,
-				39AF5F592A26850300CF9D86 /* CustomTextField.swift */,
 				39B968922A4C837C004904E6 /* PhotosCollectionViewCell.swift */,
-				39AF5F5B2A28CF4600CF9D86 /* Extentions.swift */,
 				398352102A1EAF4C00237770 /* Profile */,
 				398352092A1D532800237770 /* Controllers */,
+				39B968A02A52F1A2004904E6 /* Other */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -104,6 +102,7 @@
 		398352092A1D532800237770 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				39B968982A52AE37004904E6 /* OpenedPostViewController.swift */,
 				39AF5F5D2A29323200CF9D86 /* LogInViewController.swift */,
 				398352032A1D331300237770 /* FeedViewController.swift */,
 				398352072A1D531200237770 /* PostViewController.swift */,
@@ -120,6 +119,15 @@
 				398352052A1D332400237770 /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		39B968A02A52F1A2004904E6 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				39AF5F5B2A28CF4600CF9D86 /* Extentions.swift */,
+				39AF5F592A26850300CF9D86 /* CustomTextField.swift */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -77,11 +77,7 @@ class PhotosViewController: UIViewController {
         animatingImageView.image = image
         animatingImageView.alpha = 1.0
         animatingImageView.center = view.center
-//        animatingImageView.frame = CGRect(x: imageFrame.origin.x,
-//                                          y: imageFrame.origin.y,
-//                                          width: imageFrame.width,
-//                                          height: imageFrame.height)
-        
+
         UIView.animate(withDuration: 0.6) {
             self.animatingImageView.frame.size = CGSize(width: UIScreen.main.bounds.width,
                                                         height: UIScreen.main.bounds.width)
@@ -140,7 +136,6 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let fullPhoto = UIImage(named: gallery[indexPath.item].image)
         
         animateImage(fullPhoto)
