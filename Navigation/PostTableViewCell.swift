@@ -88,7 +88,7 @@ class PostTableViewCell: UITableViewCell {
         authorLabel.text = post.author
         descriptionLabel.text = post.description
         postImageView.image = UIImage(named: post.image)
-        likesLabel.text = "❤️ \(post.likes)"
+        likesLabel.text = "♥ \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
     }
     private func addSubviews() {
@@ -119,11 +119,11 @@ class PostTableViewCell: UITableViewCell {
             likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             likesLabel.leadingAnchor.constraint(equalTo: authorLabel.leadingAnchor),
 
-            likesLabel.bottomAnchor.constraint(equalTo: contentPostView.bottomAnchor),
+            likesLabel.bottomAnchor.constraint(equalTo: contentPostView.bottomAnchor, constant: -10),
             
             viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             viewsLabel.trailingAnchor.constraint(equalTo: contentPostView.trailingAnchor, constant: -16),
-            viewsLabel.bottomAnchor.constraint(equalTo: contentPostView.bottomAnchor)
+            viewsLabel.bottomAnchor.constraint(equalTo: contentPostView.bottomAnchor, constant: -10)
         ])
     }
     

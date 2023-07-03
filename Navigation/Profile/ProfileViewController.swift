@@ -66,6 +66,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.indetifier) as! PostTableViewCell
             cell.setupCell(post: feed[indexPath.row])
+            cell.delegate = self
             
             return cell
         }
@@ -115,8 +116,11 @@ extension ProfileViewController: PostCellDelegate {
     }
     
     func didTapLikeInCell(cell: PostTableViewCell) {
+        
         if let index = tableView.indexPath(for: cell)?.row {
             feed[index].likes += 1
+            
+            
             tableView.reloadData()
         }
     }

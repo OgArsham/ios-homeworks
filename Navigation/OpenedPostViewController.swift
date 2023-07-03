@@ -7,9 +7,9 @@
 
 import UIKit
 
-class OpenedPostViewController: UIViewController {
+final class OpenedPostViewController: UIViewController {
 
-    let authorLabel: UILabel = {
+    private let authorLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -17,7 +17,7 @@ class OpenedPostViewController: UIViewController {
         return label
     }()
     
-    let descriptionLabel = {
+    private let descriptionLabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -26,11 +26,17 @@ class OpenedPostViewController: UIViewController {
         return label
     }()
     
-    let postImageView = {
+    private let postImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         
         return image
+    }()
+    
+    private let backView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        view.backgroundColor = .white
+        return view
     }()
     
     
@@ -40,7 +46,7 @@ class OpenedPostViewController: UIViewController {
     }
     
     private func layout() {
-        view.addSubviews(allAutoLayout: false, subviews: authorLabel,postImageView, descriptionLabel)
+        view.addSubviews(allAutoLayout: false, subviews: backView, authorLabel,postImageView, descriptionLabel)
         
         NSLayoutConstraint.activate([
             authorLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -48,11 +54,12 @@ class OpenedPostViewController: UIViewController {
             
             postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 16),
             postImageView.leadingAnchor.constraint(equalTo: authorLabel.leadingAnchor),
-            postImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 16),
+            postImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             postImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             
             descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 16),
-            descriptionLabel.leadingAnchor.constraint(equalTo: postImageView.leadingAnchor)
+            descriptionLabel.leadingAnchor.constraint(equalTo: postImageView.leadingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: postImageView.trailingAnchor)
         
         ])
     }
