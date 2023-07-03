@@ -7,7 +7,15 @@
 
 import UIKit
 
-final class PhotosCollectionViewCell: UICollectionViewCell {
+protocol PhotoCellDelegate: AnyObject {
+    func didTapPhotoInCell(image: UIImage, rect: CGRect)
+}
+
+
+ class PhotosCollectionViewCell: UICollectionViewCell {
+     
+     weak var delegate: PhotoCellDelegate?
+     var imageRect: CGRect = .zero
     
     let photoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -40,4 +48,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
             photoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
            ])
        }
+     
+     func openPhoto() {
+         delegate?.didTapPhotoInCell(image: photoImageView.image!, rect: imageRect)
+     }
 }

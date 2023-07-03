@@ -9,6 +9,7 @@ import UIKit
 
 protocol PostCellDelegate: AnyObject {
     func didTapLikeInCell(cell: PostTableViewCell)
+    func tapPostImageInCell(cell: PostTableViewCell)
 }
 
 class PostTableViewCell: UITableViewCell {
@@ -41,14 +42,14 @@ class PostTableViewCell: UITableViewCell {
     let postImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
+        image.isUserInteractionEnabled = true
         
         return image
     }()
     
-    lazy var likesLabel: UILabel = {
+    let likesLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addLike)))
         label.isUserInteractionEnabled = true
         
         return label
@@ -66,6 +67,7 @@ class PostTableViewCell: UITableViewCell {
         
         addSubviews()
         layoutConstraints()
+        addGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -124,8 +126,24 @@ class PostTableViewCell: UITableViewCell {
             viewsLabel.bottomAnchor.constraint(equalTo: contentPostView.bottomAnchor)
         ])
     }
-    @objc private func addLike() {
+    
+    private func addGesture(){
+        
+        let tapLikesLabelGestureRecognizer = UITapGestureRecognizer()
+        let tapPostImageViewGestureRecognizer = UITapGestureRecognizer()
+        
+        tapLikesLabelGestureRecognizer.addTarget(self, action: #selector(addLike))
+        likesLabel.addGestureRecognizer(tapLikesLabelGestureRecognizer)
+  
+        tapPostImageViewGestureRecognizer.addTarget(self, action: #selector(tapPost))
+        postImageView.addGestureRecognizer(tapPostImageViewGestureRecognizer)
+        
+    }
+    @objc func addLike() {
         delegate?.didTapLikeInCell(cell: self)
+    }
+    @objc func tapPost() {
+        delegate?.tapPostImageInCell(cell: self)
     }
 }
 

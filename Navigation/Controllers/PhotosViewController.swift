@@ -42,6 +42,7 @@ class PhotosViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
     }
+   
 }
 
 //MARK: -  Extentions
@@ -79,4 +80,16 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         inset
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let photo = UIImage(named: gallery[indexPath.item].image)
+        
+    }
+}
+extension PhotosViewController: PhotoCellDelegate {
+    func didTapPhotoInCell(image: UIImage, rect: CGRect) {
+        
+    }
+    
+    
 }

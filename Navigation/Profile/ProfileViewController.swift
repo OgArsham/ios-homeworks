@@ -92,18 +92,33 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                let photosViewController = PhotosViewController()
                if indexPath.section == 0 {
                    navigationController?.pushViewController(photosViewController, animated: true)
+//               } else if indexPath.section == 1 {
+//                   let postVC = PostViewController()
+//                   present(postVC, animated: true)
+//                   
                }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 //MARK: Likes
 extension ProfileViewController: PostCellDelegate {
+    func tapPostImageInCell(cell: PostTableViewCell) {
+        let postVC = OpenedPostViewController()
+        guard let index = self.tableView.indexPath(for: cell)?.row else { return }
+        let indexPath = IndexPath(row: index, section: 1)
+        feed[indexPath.row].views += 1
+        let fullPost = feed[indexPath.row]
+        
+        postVC.setupCell(post: fullPost)
+        present(postVC, animated: true)
+        tableView.reloadData()
+    }
+    
     func didTapLikeInCell(cell: PostTableViewCell) {
         if let index = tableView.indexPath(for: cell)?.row {
             feed[index].likes += 1
             tableView.reloadData()
         }
-       
     }
     
 }
